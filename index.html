@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmerTezora</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: content-box;
+    }
+
+    body {
+      background-color: #bec5e4;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #111010;
+      text-align: center;
+      overflow-x: hidden;
+      line-height: 1.6;
+      animation: bgShift 15s ease-in-out infinite alternate;
+      position: relative;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particles span {
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: rgba(7, 57, 46, 0.4);
+      border-radius: 50%;
+      animation: float 12s linear infinite;
+    }
+
+    .particles span:nth-child(1) { top: 20%; left: 10%; animation-duration: 12s; }
+    .particles span:nth-child(2) { top: 60%; left: 80%; animation-duration: 18s; }
+    .particles span:nth-child(3) { top: 40%; left: 50%; animation-duration: 15s; }
+    .particles span:nth-child(4) { top: 80%; left: 20%; animation-duration: 20s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-60px) scale(1.3); opacity: 1; }
+    }
+
+    /* Orbit */
+    .orbit {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      margin-left: -100px;
+      border: 2px dashed rgba(9, 53, 44, 0.2);
+      border-radius: 50%;
+      animation: spin 12s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Logo */
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 80px 20px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .logo {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #0a2822;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px #0a2822, 0 0 40px #00b5ff, 0 0 80px #7f00ff;
+      animation: glowPulse 2.5s ease-in-out infinite alternate;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover { transform: scale(1.05); }
+
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 15px #00ffc8, 0 0 30px #00b5ff; }
+      100% { text-shadow: 0 0 25px #00ffc8, 0 0 60px #7f00ff, 0 0 120px #ff008c; }
+    }
+
+    .slogan {
+      margin-top: 15px;
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
+      letter-spacing: 2px;
+      color: #0c0c0c;
+    }
+
+    /* Buttons */
+    .btn{
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 32px;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: bold;
+      color: #1f1e1e;
+      background: transparent;
+      border: 2px solid #00ffc8;
+      border-radius: 30px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px #00ffc8, inset 0 0 10px #00ffc8;
+      text-decoration: none;
+    }
+
+    .btn:hover{
+      background: #00ffc8;
+      color: #000;
+      transform: scale(1.05);
+    }
+   
+
+    /* Extra Section */
+    .extra-section {
+      max-width: 800px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .extra-section h1 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      font-weight: bold;
+      color: #1abc9c;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(0,255,200,0.5);
+    }
+
+    .extra-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #000000;
+      text-align: justify;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      width: 300px;
+      color: white;
+    }
+
+    .popup-content input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 8px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .popup-content button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+    }
+
+    .close-btn {
+      background: #fdf8f8;
+    }
+      
+  </style>
+ 
+
+</head>
+
+<body>
+
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="orbit"></div>
+
+  <div class="logo-container">
+    <div class="logo">EmerTezora</div>
+    <div class="slogan">Where Knowledge Meets Infinity</div>
+    <a class="btn" href="bhome.html">Enter Site</a>
+    </div>
+   <!-- <div>
+<button class="btn" onclick="openSubscribe()">Subscribe</button>
+</div> -->
+
+  <div class="extra-section">
+    <h1>Welcome To EmerTezora</h1>
+    <h2> About Us</h2>
+    <p>
+      We believe knowledge is limitless. Our mission is to create
+      a space where curiosity thrives, ideas grow, and learning never ends.
+      We provide a diverse range of resources — from articles and tutorials to
+      interactive lessons and community forums.
+    </p>
+    <h2>community</h2>
+    <p>
+      Connect with the world by joining our vibrant community of learners and
+      educators.Share your thoughts, ask meaningful questions, and collaborate on projects.
+      Together, let's explore new frontiers of knowledge and innovation.</p>
+  </div>
+
+  <!-- Popup for Subscribe 
+<div class="popup" id="subscribePopup">
+  <div class="popup-content">
+    <h3>Subscribe to EmerTezora</h3>
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLScWsd6aARWHCNKQetM3qm9wPHcR_s8o0TDNxvJQeFZXjZDrxg/viewform?embedded=true"
+      width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <button class="btn close-btn" onclick="closeSubscribe()">Close</button>
+  </div>
+</div>
+
+<script>
+function openSubscribe() {
+  document.getElementById("subscribePopup").style.display = "flex";
+}
+function closeSubscribe() {
+  document.getElementById("subscribePopup").style.display = "none";
+} -->
+</script>
+ </body>
+</html>
